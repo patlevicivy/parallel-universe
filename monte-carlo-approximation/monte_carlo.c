@@ -54,10 +54,8 @@ void *my_thread_process(void *threadarg) {
 }
 
 void parallel(int nb_process) {
-    // Number of threads
     double pi = 0;
-
-    // Posix and time variables
+    // Posix variables
     struct thread_data *ptr;
     // the shared variable
     volatile double s = 0;
