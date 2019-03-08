@@ -39,7 +39,7 @@ void *my_thread_process(void *threadarg) {
         x = rand_num_gen();
         y = rand_num_gen();
 
-        z = x * x + y * y;
+        z = sqrt(x * x + y * y);
         if (z <= 1.0)
             localsum++;
     }
@@ -114,7 +114,7 @@ void serial() {
         x = rand_num_gen();
         y = rand_num_gen();
 
-        z = x * x + y * y;
+        z = sqrt(x * x + y * y);
         if (z <= 1.0)
             sum++;
     }
