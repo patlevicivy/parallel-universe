@@ -1,0 +1,9 @@
+﻿Build started 4. 3. 2019 10:49:43.
+     1>Project "D:\MatrixMultiplication\MatrixMultiplication\MatrixMultiplication.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         MatrixMultiplication.vcxproj -> D:\MatrixMultiplication\Debug\MatrixMultiplication.exe
+     1>Done Building Project "D:\MatrixMultiplication\MatrixMultiplication\MatrixMultiplication.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.16
