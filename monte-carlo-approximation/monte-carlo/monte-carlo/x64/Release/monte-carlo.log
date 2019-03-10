@@ -1,0 +1,18 @@
+﻿Build started 10. 3. 2019 15:24:54.
+     1>Project "c:\Users\ivkap\OneDrive\dokumenty\visual studio 2013\Projects\monte-carlo\monte-carlo\monte-carlo.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D _MBCS /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt "monte-carlo.c"
+         monte-carlo.c
+     1>monte-carlo.c(102): warning C4068: unknown pragma
+     1>monte-carlo.c(103): warning C4068: unknown pragma
+     1>monte-carlo.c(134): warning C4068: unknown pragma
+       Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Release\monte-carlo.exe" /NOLOGO pthreadVC2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Release\monte-carlo.pdb" /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Release\monte-carlo.lib" /MACHINE:X64 "x64\Release\monte-carlo.obj"
+         Generating code
+         Finished generating code
+         monte-carlo.vcxproj -> c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Release\monte-carlo.exe
+     1>Done Building Project "c:\Users\ivkap\OneDrive\dokumenty\visual studio 2013\Projects\monte-carlo\monte-carlo\monte-carlo.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.86
