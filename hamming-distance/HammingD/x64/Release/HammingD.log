@@ -1,0 +1,23 @@
+﻿Build started 3. 3. 2019 19:30:57.
+     1>Project "C:\Users\User\Documents\PPS\HammingD\HammingD\HammingD.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Programy\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /IC:\Users\User\Documents\PPS\HammingD\packages\pthreads.2.9.1.4\build\native\../..//build/native/include/ /Zi /nologo /W3 /WX- /MP /O2 /Oi /GL /D HAS_PTHREAD /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MDd /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt Main.c pthreads_hamming.c serial_hamming.c utils.c
+         Main.c
+         pthreads_hamming.c
+         serial_hamming.c
+         utils.c
+       Link:
+         C:\Programy\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\PPS\HammingD\x64\Release\HammingD.exe" /INCREMENTAL:NO /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\PPS\HammingD\x64\Release\HammingD.pdb" /SUBSYSTEM:CONSOLE /OPT:REF /OPT:ICF /LTCG /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\PPS\HammingD\x64\Release\HammingD.lib" /MACHINE:X64 x64\Release\Main.obj
+         x64\Release\pthreads_hamming.obj
+         x64\Release\serial_hamming.obj
+         x64\Release\utils.obj
+     1>pthreads_hamming.obj : error LNK2001: unresolved external symbol __imp_pthread_exit
+     1>pthreads_hamming.obj : error LNK2001: unresolved external symbol __imp_pthread_create
+     1>pthreads_hamming.obj : error LNK2001: unresolved external symbol __imp_pthread_join
+     1>utils.obj : error LNK2001: unresolved external symbol gettimeofday
+     1>C:\Users\User\Documents\PPS\HammingD\x64\Release\HammingD.exe : fatal error LNK1120: 4 unresolved externals
+     1>Done Building Project "C:\Users\User\Documents\PPS\HammingD\HammingD\HammingD.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.40
