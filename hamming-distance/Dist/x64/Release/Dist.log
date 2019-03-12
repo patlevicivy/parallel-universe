@@ -1,0 +1,21 @@
+﻿Build started 12. 3. 2019 19:16:44.
+     1>Project "C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\Dist\Dist.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Programy\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\packages\pthreads.2.9.1.4\build\native\../..//build/native/include/" /Zi /nologo /W1 /WX- /O2 /D HAS_PTHREAD /Gm- /EHsc /MD /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TC /errorReport:prompt main.c pthreads_hamming.c serial_hamming.c utils.c
+         main.c
+         pthreads_hamming.c
+         serial_hamming.c
+         utils.c
+         Generating Code...
+     1>c:\users\user\documents\pps\assigment\parallel-universe\hamming-distance\dist\pthreads_hamming.c(61): warning C4716: 'task' : must return a value
+       Link:
+         C:\Programy\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\x64\Release\Dist.exe" /NOLOGO pthreadVC2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /PDB:"C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\x64\Release\Dist.pdb" /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\x64\Release\Dist.lib" /MACHINE:X64 x64\Release\main.obj
+         x64\Release\pthreads_hamming.obj
+         x64\Release\serial_hamming.obj
+         x64\Release\utils.obj
+         Dist.vcxproj -> C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\x64\Release\Dist.exe
+     1>Done Building Project "C:\Users\User\Documents\PPS\Assigment\parallel-universe\hamming-distance\Dist\Dist.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:01.47
