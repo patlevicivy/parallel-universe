@@ -1,4 +1,4 @@
-﻿Build started 14-Mar-19 11:32:40 AM.
+﻿Build started 14-Mar-19 11:47:59 AM.
      1>Project "B:\4.LS\PPS\cvicenia\zadanie\parallel-universe\matrix-multiplication\MatrixMultiplication\MatrixMultiplication.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\CL.exe /c /I"B:\4.LS\PPS\cvicenia\zadanie\parallel-universe\matrix-multiplication\packages\pthreads.2.9.1.4\build\native\../..//build/native/include/" /Zi /nologo /W3 /WX- /sdl /O2 /Oi /GL /D HAS_PTHREAD /D WIN32 /D NDEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm- /EHsc /MD /GS /Gy /fp:precise /Zc:wchar_t /Zc:forScope /Fo"x64\Release\\" /Fd"x64\Release\vc120.pdb" /Gd /TP /errorReport:prompt main.cpp
@@ -20,4 +20,4 @@
 
 Build succeeded.
 
-Time Elapsed 00:00:01.68
+Time Elapsed 00:00:03.27

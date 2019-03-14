@@ -48,8 +48,8 @@ void print_matrix(vector<vector<int>> matrix) {
 	cout << endl;
 }
 
-//multiply sequencial
-vector<vector<int>> multiply_sequencial(vector<vector<int>> &matrixA, vector<vector<int>> &matrixB) {
+//multiply sequential
+vector<vector<int>> multiply_sequential(vector<vector<int>> &matrixA, vector<vector<int>> &matrixB) {
 	int matrixA_i = matrixA.size();
 	int matrixB_k = matrixB.size();
 	int matrixB_j = matrixB[0].size();
@@ -102,12 +102,12 @@ void *multiply_parallel(void *args) {
 //if number of threads is 0 or size of matrix is lower than threads multiply sequential
 vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &matrixB,int threadNum) {
 	if (threadNum < 1) {
-		return multiply_sequencial(matrixA, matrixB);
+		return multiply_sequential(matrixA, matrixB);
 	}
 
 	if (matrixA.size() < threadNum){
 		cout << "Row num of matrix A must be higher than threads(1-8) so calculate sequential" << endl;
-		return multiply_sequencial(matrixA, matrixB);
+		return multiply_sequential(matrixA, matrixB);
 	}
 
 	vector<arg_struct> matrix_struct(threadNum);
