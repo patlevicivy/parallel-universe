@@ -3,9 +3,8 @@
 #include <stdio.h>
 #include <vector>
 #include <iomanip>
-#include <time.h>
-
-#include "pthread.h"
+#include <chrono>
+#include <pthread.h>
 
 using namespace std;
 
@@ -59,11 +58,17 @@ vector<vector<int>> multiply_sequencial(vector<vector<int>> &matrixA, vector<vec
 
 	vector<vector<int>> result(matrixA_i, vector<int>(matrixB_j, 0));
 
+	auto start = chrono::system_clock::now();
+
 	for (int i = 0; i < matrixA_i; i++)
 		for (int k = 0; k < matrixB_k; k++) {
 			for (int j = 0; j < matrixB_j; j++)
 				result[i][j] += matrixA[i][k] * matrixB[k][j];
 		}
+
+	auto end = chrono::system_clock::now();
+	chrono::duration<double> final_time = end - start;
+	printf("In time: %f \n", final_time.count());
 
 	return result;
 }
@@ -110,6 +115,8 @@ vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &
 	vector<pthread_t> threads(threadNum);
 	resultMatrix = result;
 
+	auto start = chrono::system_clock::now();
+
 	for (int i = 0; i < threadNum; i++) {
 		matrix_struct[i].matrixA = matrixA;
 		matrix_struct[i].matrixB = matrixB;
@@ -122,7 +129,12 @@ vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &
 		pthread_join(threads[i], NULL);
 	}
 
+	auto end = chrono::system_clock::now();
+
 	printf("Multiplied parallel in %d threads\n", threadNum);
+	chrono::duration<double> final_time = end - start;
+	printf("In time: ");
+	cout << final_time.count() << endl;
 
 	return resultMatrix;
 }
@@ -135,19 +147,11 @@ int main(){
 	print_matrix(matrixB);
 
 	for (int i = 0; i < 9; i+=2) {
-		clock_t begin = clock();
-
 		vector<vector<int>> result = multiply(matrixA, matrixB, i);
-
-		clock_t end = clock();
-
-		printf("In time: ");
-		cout << endl << (double)(end - begin) / CLOCKS_PER_SEC << endl;
-
 		print_matrix(result);
-
 	}
-	cin.get();
+
+	getchar();
 
 	return 0;
 }
