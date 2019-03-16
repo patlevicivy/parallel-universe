@@ -31,7 +31,7 @@ double rand_num_gen() {
 // Thread function
 void *my_thread_process(void *threadarg) {
 	register double x, y, z;
-	register long int localsum = 0;
+	register long int local_sum = 0;
 	struct thread_data *my_data;
 	my_data = (struct thread_data *) threadarg;
 	// Generate random values
@@ -41,12 +41,12 @@ void *my_thread_process(void *threadarg) {
 
 		z = sqrt(x * x + y * y);
 		if (z <= 1.0)
-			localsum++;
+			local_sum++;
 	}
 	// Thread asserting the lock on s
 	pthread_mutex_lock(my_data->p_s_lock);
 	// Change the value of s
-	*(my_data->p_s) += localsum;
+	*(my_data->p_s) += local_sum;
 	// Remove the lock
 	pthread_mutex_unlock(my_data->p_s_lock);
 
@@ -85,29 +85,26 @@ void parallel(int nb_process) {
 	for (long int j = 0; j < nb_process; j++)
 		pthread_join(ptr_tid[j], &ret);
 
-	clock_t end = clock();
-
 	// Pi value
 	pi = s / TOT_COUNT;
 	pi *= 4;
+
 	// Output
+	clock_t end = clock();
 	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
 	printf("[PARALLEL]   # Time taken: %lf s\n", seconds);
-	printf("[PARALLEL]   # Estimation of Pi = %lf\n", pi);
-	printf("[PARALLEL]   # Number of tries = %d\n", TOT_COUNT);
-	printf("[PARALLEL]   # Number of threads = %d\n\n", nb_process);
+	printf("					   # Estimation of Pi = %lf\n", pi);
+	printf("					   # Number of tries = %d\n", TOT_COUNT);
+	printf("					   #Number of threads = %d\n\n", nb_process);
 
 }
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-
-void serial() {
+void sequential() {
 	double volatile x, y, z;
 	double volatile sum = 0;
 
 	// Calculate time taken by a request
-	clock_t volatile start = clock();
+	clock_t start = clock();
 
 	// Generate random values
 	for (int i = 0; i < TOT_COUNT; i++) {
@@ -123,23 +120,22 @@ void serial() {
 	pi *= 4;
 
 	// Calculate time it took
-	clock_t volatile end = clock();
-	float volatile seconds = (float)(end - start) / CLOCKS_PER_SEC;
-	printf("[SERIAL]     # Time taken: %lf s\n", seconds);
-	printf("[SERIAL]     # Estimation of Pi = %lf\n", pi);
-	printf("[SERIAL]     # Number of tries = %d\n", TOT_COUNT);
+	clock_t end = clock();
+	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+	printf("[SEQUENTIAL] # Time taken: %lf s\n", seconds);
+	printf("    				 # Estimation of Pi = %lf\n", pi);
+	printf("     				 # Number of tries = %d\n", TOT_COUNT);
 
 }
 
-#pragma GCC pop_options
-
 int main(int argc, char **argv) {
+	sequential();
+
 	parallel(2);
 	parallel(4);
 	parallel(8);
-	serial();
 
 	getchar();
 
-	return 0;
+	exit(0);
 }
