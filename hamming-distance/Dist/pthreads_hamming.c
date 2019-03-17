@@ -4,15 +4,19 @@
 void compute_pthreads(uint8_t **A, int numOfStringsA, uint8_t **B, int numOfStringsB, uint8_t **distances,
                       int len, long long unsigned *sums, int threads) {
 
+	//Thread and its agruments are allocated
     pthread_t *TT = (pthread_t *) malloc(threads * sizeof(pthread_t));
     t_args **argTable = (t_args **) malloc(threads * sizeof(t_args *));
 
+	//Argument table is created
     for (int i = 0; i < threads; i++) {
 		argTable[i] = construct_targ(A, B, distances, numOfStringsA, numOfStringsB, len, sums, -1, threads);
     }
 
+
     double start_time = gettime();
 
+	//Set table id and create thread
     for (int t = 0; t < threads; t++) {
         argTable[t]->tid = t;
         
@@ -22,15 +26,21 @@ void compute_pthreads(uint8_t **A, int numOfStringsA, uint8_t **B, int numOfStri
                 }
     }
 
+	//Join threads and free argument table
     for (int t = 0; t < threads; t++) {
         pthread_join(TT[t], NULL);
         free(argTable[t]);
     }
 
     free(TT);
+
+	//Sum all distances
     long long unsigned sum = eval_threads_sum(sums, threads);
 
-	printf("threads:%d\ttime:%lf\tsum:%llu\n", threads, (gettime() - start_time)/CLOCKS_PER_SEC,sum);
+	double end_time = gettime();
+	double final_time = (end_time - start_time) / CLOCKS_PER_SEC;
+
+	printf("threads:%d\ttime:%lf\tsum:%llu\n", threads, final_time,sum);
 }
 
 void *task(void *arguments) {
@@ -57,5 +67,7 @@ void *task(void *arguments) {
         }
     }
 	sums[tid] = sum;
+	
+	//Terminate calling thread
     pthread_exit(NULL);
 }
