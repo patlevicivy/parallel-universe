@@ -44,14 +44,14 @@ void *my_thread_process(void *thread_arg) {
 		if (sqrt(x * x + y * y) <= 1.0)
 			local_sum++;
 	}
-	// Thread asserting the lock on shared value
-	pthread_mutex_lock(my_data->lock); // TODO
+	// TODO: Assert the lock on shared value
+
 	// Change the value of sum
 	*(my_data->shared_val) += local_sum;
-	// Remove the lock
-	pthread_mutex_unlock(my_data->lock); // TODO
-	// Terminate the thread
-	pthread_exit(NULL); // TODO
+	// TODO: Remove the lock
+
+	// TODO: Terminate the thread
+
 	return NULL;
 }
 
@@ -65,8 +65,7 @@ void parallel(int nb_process) {
 
 	// Allocation
 	ptr = (struct thread_data *) calloc(nb_process, sizeof(struct thread_data));
-	// Initialize the lock variable
-	pthread_mutex_init(&sum_lock, NULL); // TODO
+	// TODO: Initialize the lock variable
 
 	clock_t start = clock();
 
@@ -76,7 +75,7 @@ void parallel(int nb_process) {
 		ptr[i].thread_count = nb_process;
 		ptr[i].iter_count = TOT_COUNT;
 
-		if (pthread_create(&ptr[i].thread_id, NULL, my_thread_process, &ptr[i]) != 0) { // TODO
+		if () { // TODO: Start a new thread and check return value
 			printf("Error creating thread with id = %ld\n", i);
 			exit(EXIT_FAILURE);
 		}
@@ -84,7 +83,7 @@ void parallel(int nb_process) {
 
 	// Join nb_process pthreads
 	for (long int j = 0; j < nb_process; j++)
-		if (pthread_join(ptr[j].thread_id, NULL) != 0) { // TODO
+		if () { // TODO: Wait for the thread specified by thread_id to terminate and check return value
 			printf("Error joining thread with id = %ld\n", j);
 			exit(EXIT_FAILURE);
 		}
