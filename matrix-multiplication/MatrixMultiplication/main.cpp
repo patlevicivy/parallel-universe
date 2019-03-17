@@ -76,7 +76,7 @@ vector<vector<int>> multiply_sequential(vector<vector<int>> &matrixA, vector<vec
 //multiply parallel
 void *multiply_parallel(void *args) {
 	struct arg_struct *arguments = (struct arg_struct *)args;
-	int start = start = (arguments->matrixA.size() / arguments->MAX_THREAD) * arguments->i;
+	int start = (arguments->matrixA.size() / arguments->MAX_THREAD) * arguments->i;
 	int matrixA_i;
 
 	if ((arguments->i + 1 == arguments->MAX_THREAD)
@@ -94,6 +94,8 @@ void *multiply_parallel(void *args) {
 				resultMatrix[i][j] += arguments->matrixA[i][k] * arguments->matrixB[k][j];
 			}
 		}
+
+	pthread_exit(NULL);
 
 	return NULL;
 }
@@ -135,7 +137,6 @@ vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &
 	chrono::duration<double> final_time = end - start;
 	cout << "In time: " << final_time.count() << endl;
 
-	pthread_exit(NULL);
 
 	return resultMatrix;
 }
