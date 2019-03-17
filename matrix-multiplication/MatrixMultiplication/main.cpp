@@ -3,9 +3,8 @@
 #include <stdio.h>
 #include <vector>
 #include <iomanip>
-#include <time.h>
-
-#include "pthread.h"
+#include <chrono>
+#include <pthread.h>
 
 using namespace std;
 
@@ -49,8 +48,8 @@ void print_matrix(vector<vector<int>> matrix) {
 	cout << endl;
 }
 
-//multiply sequencial
-vector<vector<int>> multiply_sequencial(vector<vector<int>> &matrixA, vector<vector<int>> &matrixB) {
+//multiply sequential
+vector<vector<int>> multiply_sequential(vector<vector<int>> &matrixA, vector<vector<int>> &matrixB) {
 	int matrixA_i = matrixA.size();
 	int matrixB_k = matrixB.size();
 	int matrixB_j = matrixB[0].size();
@@ -59,11 +58,17 @@ vector<vector<int>> multiply_sequencial(vector<vector<int>> &matrixA, vector<vec
 
 	vector<vector<int>> result(matrixA_i, vector<int>(matrixB_j, 0));
 
+	auto start = chrono::system_clock::now();
+
 	for (int i = 0; i < matrixA_i; i++)
 		for (int k = 0; k < matrixB_k; k++) {
 			for (int j = 0; j < matrixB_j; j++)
 				result[i][j] += matrixA[i][k] * matrixB[k][j];
 		}
+
+	auto end = chrono::system_clock::now();
+	chrono::duration<double> final_time = end - start;
+	cout << "In time: " << final_time.count() << endl;
 
 	return result;
 }
@@ -71,7 +76,7 @@ vector<vector<int>> multiply_sequencial(vector<vector<int>> &matrixA, vector<vec
 //multiply parallel
 void *multiply_parallel(void *args) {
 	struct arg_struct *arguments = (struct arg_struct *)args;
-	int start = start = (arguments->matrixA.size() / arguments->MAX_THREAD) * arguments->i;
+	int start = (arguments->matrixA.size() / arguments->MAX_THREAD) * arguments->i;
 	int matrixA_i;
 
 	if ((arguments->i + 1 == arguments->MAX_THREAD)
@@ -90,6 +95,8 @@ void *multiply_parallel(void *args) {
 			}
 		}
 
+	pthread_exit(NULL);
+
 	return NULL;
 }
 
@@ -97,18 +104,20 @@ void *multiply_parallel(void *args) {
 //if number of threads is 0 or size of matrix is lower than threads multiply sequential
 vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &matrixB,int threadNum) {
 	if (threadNum < 1) {
-		return multiply_sequencial(matrixA, matrixB);
+		return multiply_sequential(matrixA, matrixB);
 	}
 
 	if (matrixA.size() < threadNum){
 		cout << "Row num of matrix A must be higher than threads(1-8) so calculate sequential" << endl;
-		return multiply_sequencial(matrixA, matrixB);
+		return multiply_sequential(matrixA, matrixB);
 	}
 
 	vector<arg_struct> matrix_struct(threadNum);
 	vector<vector<int>> result(matrixA.size(), vector<int>(matrixB[0].size(), 0));
 	vector<pthread_t> threads(threadNum);
 	resultMatrix = result;
+
+	auto start = chrono::system_clock::now();
 
 	for (int i = 0; i < threadNum; i++) {
 		matrix_struct[i].matrixA = matrixA;
@@ -122,7 +131,12 @@ vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &
 		pthread_join(threads[i], NULL);
 	}
 
+	auto end = chrono::system_clock::now();
+
 	printf("Multiplied parallel in %d threads\n", threadNum);
+	chrono::duration<double> final_time = end - start;
+	cout << "In time: " << final_time.count() << endl;
+
 
 	return resultMatrix;
 }
@@ -135,19 +149,11 @@ int main(){
 	print_matrix(matrixB);
 
 	for (int i = 0; i < 9; i+=2) {
-		clock_t begin = clock();
-
 		vector<vector<int>> result = multiply(matrixA, matrixB, i);
-
-		clock_t end = clock();
-
-		printf("In time: ");
-		cout << endl << (double)(end - begin) / CLOCKS_PER_SEC << endl;
-
 		print_matrix(result);
-
 	}
-	cin.get();
+
+	getchar();
 
 	return 0;
 }
