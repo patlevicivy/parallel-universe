@@ -1,0 +1,21 @@
+﻿Build started 12. 3. 2019 18:54:25.
+     1>Project "C:\Users\User\Documents\PPS\Dist\Dist\Dist.vcxproj" on node 2 (Build target(s)).
+     1>ClCompile:
+         C:\Programy\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /IC:\Users\User\Documents\PPS\Dist\packages\pthreads.2.9.1.4\build\native\../..//build/native/include/ /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D HAS_PTHREAD /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TC /analyze- /errorReport:prompt main.c pthreads_hamming.c serial_hamming.c utils.c
+         utils.c
+         serial_hamming.c
+         pthreads_hamming.c
+         main.c
+         Generating Code...
+     1>c:\users\user\documents\pps\dist\dist\pthreads_hamming.c(61): warning C4716: 'task' : must return a value
+       Link:
+         C:\Programy\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\User\Documents\PPS\Dist\Debug\Dist.exe" /INCREMENTAL /NOLOGO pthreadVC2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\User\Documents\PPS\Dist\Debug\Dist.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\User\Documents\PPS\Dist\Debug\Dist.lib" /MACHINE:X86 Debug\main.obj
+         Debug\pthreads_hamming.obj
+         Debug\serial_hamming.obj
+         Debug\utils.obj
+     1>LINK : fatal error LNK1104: cannot open file 'pthreadVC2.lib'
+     1>Done Building Project "C:\Users\User\Documents\PPS\Dist\Dist\Dist.vcxproj" (Build target(s)) -- FAILED.
+
+Build FAILED.
+
+Time Elapsed 00:00:01.07
