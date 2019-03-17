@@ -6,18 +6,20 @@
 #include <time.h>
 #include <math.h>
 
-#define TOT_COUNT 10000000
+#define TOT_COUNT 100000000
 
 // Structure for thread
 struct thread_data {
 	// Shared value
-	double volatile *p_s;
-	// Lock variable s
-	pthread_mutex_t *p_s_lock;
+	double volatile *shared_val;
+	// Lock variable
+	pthread_mutex_t *lock;
 	// Number of iterations
-	long int nb_iter;
+	long int iter_count;
 	// Number of threads
-	int nb_thread;
+	int thread_count;
+	// ID redurned by create
+	pthread_t thread_id;
 };
 
 double rand_num_gen() {
@@ -29,26 +31,26 @@ double rand_num_gen() {
 }
 
 // Thread function
-void *my_thread_process(void *threadarg) {
-	register double x, y, z;
-	register long int localsum = 0;
+void *my_thread_process(void *thread_arg) {
+	double x, y;
+	long int local_sum = 0;
 	struct thread_data *my_data;
-	my_data = (struct thread_data *) threadarg;
+	my_data = (struct thread_data *) thread_arg;
 	// Generate random values
-	for (long int i = 0; i < (my_data->nb_iter) / (my_data->nb_thread); i++) {
+	for (long int i = 0; i < (my_data->iter_count) / (my_data->thread_count); i++) {
 		x = rand_num_gen();
 		y = rand_num_gen();
 
-		z = sqrt(x * x + y * y);
-		if (z <= 1.0)
-			localsum++;
+		if (sqrt(x * x + y * y) <= 1.0)
+			local_sum++;
 	}
-	// Thread asserting the lock on s
-	pthread_mutex_lock(my_data->p_s_lock);
-	// Change the value of s
-	*(my_data->p_s) += localsum;
-	// Remove the lock
-	pthread_mutex_unlock(my_data->p_s_lock);
+	// TODO: Assert the lock on shared value
+
+	// Change the value of sum
+	*(my_data->shared_val) += local_sum;
+	// TODO: Remove the lock
+
+	// TODO: Terminate the thread
 
 	return NULL;
 }
@@ -58,88 +60,83 @@ void parallel(int nb_process) {
 	// Posix variables
 	struct thread_data *ptr;
 	// the shared variable
-	volatile double s = 0;
-	pthread_mutex_t s_lock;
-	pthread_t *ptr_tid;
-	pthread_attr_t attr;
-	void *ret;
+	volatile double sum = 0;
+	pthread_mutex_t sum_lock;
 
-	// nb_process pthreads allocation
-	ptr_tid = (pthread_t *)calloc(nb_process, sizeof(pthread_t));
+	// Allocation
 	ptr = (struct thread_data *) calloc(nb_process, sizeof(struct thread_data));
-	// Initialize the lock variable
-	pthread_mutex_init(&s_lock, NULL);
+	// TODO: Initialize the lock variable
 
 	clock_t start = clock();
 
 	for (long int i = 0; i < nb_process; i++) {
-		ptr[i].p_s = &s;
-		ptr[i].p_s_lock = &s_lock;
-		ptr[i].nb_thread = nb_process;
-		ptr[i].nb_iter = TOT_COUNT;
-		pthread_attr_init(&attr);
-		pthread_create(&ptr_tid[i], &attr, my_thread_process, &ptr[i]);
+		ptr[i].shared_val = &sum;
+		ptr[i].lock = &sum_lock;
+		ptr[i].thread_count = nb_process;
+		ptr[i].iter_count = TOT_COUNT;
+
+		if () { // TODO: Start a new thread and check return value
+			printf("Error creating thread with id = %ld\n", i);
+			exit(EXIT_FAILURE);
+		}
 	}
 
 	// Join nb_process pthreads
 	for (long int j = 0; j < nb_process; j++)
-		pthread_join(ptr_tid[j], &ret);
-
-	clock_t end = clock();
+		if () { // TODO: Wait for the thread specified by thread_id to terminate and check return value
+			printf("Error joining thread with id = %ld\n", j);
+			exit(EXIT_FAILURE);
+		}
 
 	// Pi value
-	pi = s / TOT_COUNT;
-	pi *= 4;
+	pi = 4 * sum / TOT_COUNT;
+
 	// Output
+	clock_t end = clock();
 	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
 	printf("[PARALLEL]   # Time taken: %lf s\n", seconds);
-	printf("[PARALLEL]   # Estimation of Pi = %lf\n", pi);
-	printf("[PARALLEL]   # Number of tries = %d\n", TOT_COUNT);
-	printf("[PARALLEL]   # Number of threads = %d\n\n", nb_process);
+	printf("             # Estimation of Pi = %lf\n", pi);
+	printf("             # Number of tries = %d\n", TOT_COUNT);
+	printf("             # Number of threads = %d\n\n", nb_process);
 
+	free(ptr);
 }
 
-#pragma GCC push_options
-#pragma GCC optimize ("O0")
-
-void serial() {
-	double volatile x, y, z;
+void sequential() {
+	double volatile x, y;
 	double volatile sum = 0;
 
 	// Calculate time taken by a request
-	clock_t volatile start = clock();
+	clock_t start = clock();
 
 	// Generate random values
-	for (int i = 0; i < TOT_COUNT; i++) {
+	for (long int i = 0; i < TOT_COUNT; i++) {
 		x = rand_num_gen();
 		y = rand_num_gen();
 
-		z = sqrt(x * x + y * y);
-		if (z <= 1.0)
+		if (sqrt(x * x + y * y) <= 1.0)
 			sum++;
 	}
 
-	double volatile pi = sum / TOT_COUNT;
-	pi *= 4;
+	double pi = 4 * sum / TOT_COUNT;
 
 	// Calculate time it took
-	clock_t volatile end = clock();
-	float volatile seconds = (float)(end - start) / CLOCKS_PER_SEC;
-	printf("[SERIAL]     # Time taken: %lf s\n", seconds);
-	printf("[SERIAL]     # Estimation of Pi = %lf\n", pi);
-	printf("[SERIAL]     # Number of tries = %d\n", TOT_COUNT);
+	clock_t end = clock();
+	float seconds = (float)(end - start) / CLOCKS_PER_SEC;
+	printf("[SEQUENTIAL] # Time taken: %lf s\n", seconds);
+	printf("             # Estimation of Pi = %lf\n", pi);
+	printf("             # Number of tries = %d\n\n", TOT_COUNT);
 
 }
 
-#pragma GCC pop_options
-
 int main(int argc, char **argv) {
+	sequential();
+
 	parallel(2);
 	parallel(4);
 	parallel(8);
-	serial();
 
 	getchar();
 
-	return 0;
+	exit(EXIT_SUCCESS);
 }
