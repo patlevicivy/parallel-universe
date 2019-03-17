@@ -68,7 +68,7 @@ vector<vector<int>> multiply_sequential(vector<vector<int>> &matrixA, vector<vec
 
 	auto end = chrono::system_clock::now();
 	chrono::duration<double> final_time = end - start;
-	printf("In time: %f \n", final_time.count());
+	cout << "In time: " << final_time.count() << endl;
 
 	return result;
 }
@@ -133,8 +133,9 @@ vector<vector<int>> multiply(vector<vector<int>> &matrixA, vector<vector<int>> &
 
 	printf("Multiplied parallel in %d threads\n", threadNum);
 	chrono::duration<double> final_time = end - start;
-	printf("In time: ");
-	cout << final_time.count() << endl;
+	cout << "In time: " << final_time.count() << endl;
+
+	pthread_exit(NULL);
 
 	return resultMatrix;
 }
