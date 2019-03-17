@@ -52,6 +52,7 @@ void *my_thread_process(void *thread_arg) {
     pthread_mutex_unlock(my_data->lock); // TODO
     // Terminate the thread
     pthread_exit(NULL); // TODO
+    //retrun NULL;
 }
 
 void parallel(int nb_process) {
@@ -61,8 +62,6 @@ void parallel(int nb_process) {
     // the shared variable
     volatile double sum = 0;
     pthread_mutex_t sum_lock;
-    //pthread_t *ptr_tid;
-    pthread_attr_t attr;
 
     // Allocation
     ptr = (struct thread_data *) calloc(nb_process, sizeof(struct thread_data));
@@ -86,8 +85,8 @@ void parallel(int nb_process) {
     // Join nb_process pthreads
     for (long int j = 0; j < nb_process; j++)
         if (pthread_join(ptr[j].thread_id, NULL) != 0) { // TODO
-          printf("Error joining thread with id = %ld\n", j);
-          exit(EXIT_FAILURE);
+            printf("Error joining thread with id = %ld\n", j);
+            exit(EXIT_FAILURE);
         }
 
     // Pi value
