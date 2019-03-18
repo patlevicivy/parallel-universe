@@ -32,8 +32,8 @@ double rand_num_gen() {
 
 // Thread function
 void *my_thread_process(void *thread_arg) {
-    /*register*/ double x, y;
-    /*register*/ long int local_sum = 0;
+    double x, y;
+    long int local_sum = 0;
     struct thread_data *my_data;
     my_data = (struct thread_data *) thread_arg;
     // Generate random values
@@ -137,6 +137,8 @@ int main(int argc, char **argv) {
     parallel(2);
     parallel(4);
     parallel(8);
+
+    getchar();
 
     exit(EXIT_SUCCESS);
 }
