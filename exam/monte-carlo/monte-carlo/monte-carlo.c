@@ -2,7 +2,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "pthread.h"
+//TODO: include the POSIX library header file
 #include <time.h>
 #include <math.h>
 
@@ -61,7 +61,7 @@ void parallel(int nb_process) {
 	struct thread_data *ptr;
 	// the shared variable
 	volatile double sum = 0;
-	pthread_mutex_t sum_lock;
+	// TODO: declare variable that represents mutex later referred as sum_lock
 
 	// Allocation
 	ptr = (struct thread_data *) calloc(nb_process, sizeof(struct thread_data));

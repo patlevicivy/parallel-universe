@@ -1,4 +1,4 @@
-#include "pthread.h"
+//TODO: include the POSIX library header file
 #include "utils.h"
 
 void compute_pthreads(uint8_t **A, int numOfStringsA, uint8_t **B, int numOfStringsB, uint8_t **distances,
@@ -19,8 +19,8 @@ void compute_pthreads(uint8_t **A, int numOfStringsA, uint8_t **B, int numOfStri
 	//Set table id and create thread
     for (int t = 0; t < threads; t++) {
         argTable[t]->tid = t;
-        
-        
+
+
                 if (//TODO: create thread that runs task with given arguments
                 ) {
                     printf("Error creating thread C with tid=%d\n", t);
@@ -69,6 +69,6 @@ void *task(void *arguments) {
         }
     }
 	sums[tid] = sum;
-	
+
     //TODO: terminate thread
 }
