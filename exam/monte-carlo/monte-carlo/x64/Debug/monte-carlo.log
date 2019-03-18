@@ -1,0 +1,10 @@
+﻿Build started 10. 3. 2019 15:09:12.
+     1>Project "c:\Users\ivkap\OneDrive\dokumenty\visual studio 2013\Projects\monte-carlo\monte-carlo\monte-carlo.vcxproj" on node 2 (Build target(s)).
+     1>Link:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Debug\monte-carlo.exe" /INCREMENTAL /NOLOGO pthreadVC2.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Debug\monte-carlo.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Debug\monte-carlo.lib" /MACHINE:X64 "x64\Debug\monte-carlo.obj"
+         monte-carlo.vcxproj -> c:\users\ivkap\onedrive\dokumenty\visual studio 2013\Projects\monte-carlo\x64\Debug\monte-carlo.exe
+     1>Done Building Project "c:\Users\ivkap\OneDrive\dokumenty\visual studio 2013\Projects\monte-carlo\monte-carlo\monte-carlo.vcxproj" (Build target(s)).
+
+Build succeeded.
+
+Time Elapsed 00:00:00.92
